@@ -8,9 +8,9 @@ import entity.User;
 import main.MainRun;
 import view.Menu;
 
-public class InPutHandle {
+public class Handle {
 	//	hàm nhập
-	public static User inputUser(Scanner sc) {
+	public User inputUser(Scanner sc) {
 		System.out.println("Mời bạn nhập Username");
 		String name = sc.nextLine();
 		System.out.println("Mời bạn nhập Password");
@@ -19,13 +19,13 @@ public class InPutHandle {
 		return user;
 	}
 	// hàm sử lý khi đăng kí
-	public static User inputUserForRegister(Scanner sc) {
+	public User inputUserForRegister(Scanner sc) {
 		User user = new User();
 		while (true) {
 			if (user.getUserName() == null) {
 				System.out.println("Mời bạn nhập Username");
 				String name = sc.nextLine();
-				if (InPutHandle.checkUserName(name)) {
+				if (checkUserName(name)) {
 					user.setUserName(name);
 				} else {
 					break;
@@ -34,7 +34,7 @@ public class InPutHandle {
 			if (user.getPassWord() == null) {
 				System.out.println("Mời bạn nhập Password");
 				String password = sc.nextLine();
-				if (InPutHandle.checkPassWord(password)) {
+				if (checkPassWord(password)) {
 					user.setPassWord(password);
 				} else {
 					break;
@@ -43,7 +43,7 @@ public class InPutHandle {
 			if (user.getEmail() == null) {
 				System.out.println("Mời bạn nhập Email");
 				String email = sc.nextLine();
-				if (InPutHandle.checkEmail(email)) {
+				if (checkEmail(email)) {
 					user.setEmail(email);
 					break;
 				} else {
@@ -55,7 +55,7 @@ public class InPutHandle {
 		return user;
 	}
 	// hàm check ten khi dang ki
-		public static boolean checkUserName(String userName) {
+		public boolean checkUserName(String userName) {
 			for (int i = 0; i < MainRun.userArrayList.size(); i++) {
 				if (MainRun.userArrayList.get(i).getUserName().equals(userName)) {
 					System.out.println("Ten da ton tai, vui long chon ten khac");
@@ -65,7 +65,7 @@ public class InPutHandle {
 			return true;
 		}
 // hàm check email khi đăng kí
-	public static boolean checkEmail(String email) {
+	public boolean checkEmail(String email) {
 		Pattern checkMail = Pattern.compile("^[a-zA-z][a-zA-z)-9]+@[a-zA-Z]+(\\.[a-zA-Z]+){1,3}$");
 		if (!checkMail.matcher(email).find()) {
 			System.out.println("Email không đúng định dạng, vui lòng nhập lại ");
@@ -81,7 +81,7 @@ public class InPutHandle {
 	}
 	// hàm xử lý khi đăng kí passWord
 
-	public static boolean checkPassWord(String passWord) {
+	public  boolean checkPassWord(String passWord) {
 
 			Pattern p = Pattern.compile("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$");
 			
@@ -91,10 +91,8 @@ public class InPutHandle {
 		}		
 		return true;
 	}
-
 	
-	
-	public static void xuLySauKhiThayDoiThongTin(User user) {
+	public void xuLySauKhiThayDoiThongTin(User user) {
 		for (int i = 0; i < MainRun.userArrayList.size(); i++) {
 			if(MainRun.userArrayList.get(i).getUserName().equalsIgnoreCase(user.getUserName())|| MainRun.userArrayList.get(i).getEmail().equalsIgnoreCase(user.getEmail())) {
 				MainRun.userArrayList.get(i).setEmail(user.getEmail());
@@ -104,9 +102,61 @@ public class InPutHandle {
 			}	
 	}
 	}
-	public static void display(User user) {
+	public int checkLogin(User user) {
+		if (!checkUserName(user)) {
+			return 1;
+		} else if (!checkPassWord(user)) {
+			return 2;
+		} else if (checkUserName(user) && checkPassWord(user)) {
+			return 3;
+		}
+		return 0;
+	}
+
+	public boolean checkUserName(User user) {
+		for (User user2 : MainRun.userArrayList) {
+			if (user2.getUserName().equals(user.getUserName())) {
+				user.setEmail(user2.getEmail());
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkPassWord(User user) {
+		for (User user2 : MainRun.userArrayList) {
+			if (user2.getPassWord().equals(user.getPassWord())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void xuLyDangNhap(User user) {
+		if (checkLogin(user) == 3) {
+			Menu.MenuSauKhiDangNhap(user);
+		} else if (checkLogin(user) == 1) {
+			System.out.println("Vui long kiem tra lai user va dang nhap lai");
+			MainRun.showSortMenu();
+		} else if (checkLogin(user) == 2) {
+			System.out.println("Password khong dung");
+			Menu.menuDangNhapSai(user);
+		}
+	}
+	public void display(User user) {
 		System.out.println(user.toString());
 		
 	}
+	
+	public void dangKy() {
+		Scanner sc = new Scanner(System.in);
+		Handle inPutHandle = new Handle();
+		User user = inPutHandle.inputUserForRegister(sc);
+		if (user.getPassWord() != null && user.getEmail() != null && user.getPassWord() != null) {
+			MainRun.userArrayList.add(user);
+		}
+
+	}
+
 	
 }

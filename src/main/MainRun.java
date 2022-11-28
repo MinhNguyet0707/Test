@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import entity.User;
-import handle.DangKy;
 import handle.DangNhapSai;
-import handle.InPutHandle;
+import handle.DangNhapThanhCong;
+import handle.Handle;
 import view.Menu;
 
 public class MainRun {
 	public static ArrayList<User> userArrayList = new ArrayList<>();
-
-	public static void main(String[] args) {
+    
+		public static void main(String[] args) {
 		showSortMenu();
 	}
 
 	public static void showSortMenu() {
+		Handle inPutHandle = new Handle();
+		  DangNhapSai dangNhapSai = new DangNhapSai();	
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Vui lòng lựa chọn : ");
 		System.out.println("1. Đăng nhập");
@@ -31,10 +33,10 @@ public class MainRun {
 		} while (true);
 		switch (choose) {
 		case 1:
-			DangNhapSai.xuLyDangNhap();
+			dangNhapSai.xuLyDangNhap(sc);
 			break;
 		case 2:
-			DangKy.dangKy();
+			inPutHandle.dangKy();
 			showSortMenu();
 			break;
 		case 3:

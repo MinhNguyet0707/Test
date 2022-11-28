@@ -5,7 +5,7 @@ import java.util.Scanner;
 import entity.User;
 import handle.DangNhapSai;
 import handle.DangNhapThanhCong;
-import handle.InPutHandle;
+import handle.Handle;
 import main.MainRun;
 
 
@@ -19,24 +19,26 @@ public class Menu {
 	        int choose = 0;   
 	    }
 	 public static void MenuSauKhiDangNhap(User user) {
+		 DangNhapThanhCong dangNhapThanhCong = new DangNhapThanhCong();
+		 Handle inPutHandle = new Handle();
 	        while (true) {
 	            showMenu(user);
 	            int functionChoice = chooseFunction();
 	            switch (functionChoice) {
 	            case 1:
-	                DangNhapThanhCong.changeUser(user);
-	                InPutHandle.display(user);
+	             dangNhapThanhCong .changeUser(user);
+	             inPutHandle.display(user);
 	                break;
 	            case 2:
-	            	DangNhapThanhCong.changeEmail(user);	            	
-	            	InPutHandle.display(user);
+	            	dangNhapThanhCong.changeEmail(user);	            	
+	            	inPutHandle.display(user);
 	                break;
 	            case 3:
-	            	DangNhapThanhCong.changPassword(user); 	            
-	            	InPutHandle.display(user);
+	            	dangNhapThanhCong.changPassword(user); 	            
+	            	inPutHandle.display(user);
 	            	break;
 	            case 4:
-	            	InPutHandle.display(user);	 
+	            	inPutHandle.display(user);	 
 	            	user = null;
 	            	MainRun.showSortMenu();            			              
 	                break;	                
@@ -59,6 +61,7 @@ public class Menu {
 	    }
 
 		public static void menuDangNhapSai(User user) {
+			DangNhapSai dangNhapSai = new DangNhapSai();
 	        System.out.println("Xin mời chọn : ");
 	        System.out.println("1.Đăng nhập lại ");
 	        System.out.println("2. Quên mật khẩu");
@@ -76,20 +79,13 @@ public class Menu {
 	            	MainRun.showSortMenu();  
 	                break;
 	            case 2:
-	            	 DangNhapSai.quenMatKhau(user);
+	            	 dangNhapSai.quenMatKhau(user);
 	            	 MainRun.showSortMenu();
 	                break;
 	            case 3:
 	                return;
 	        }
 	    }
-//		
-		
-	   
-
-		
-
-
 	}
 
 
