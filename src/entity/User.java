@@ -1,4 +1,4 @@
-package entyti;
+package entity;
 
 import java.util.Scanner;
 

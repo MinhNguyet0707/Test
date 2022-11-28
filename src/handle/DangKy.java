@@ -2,7 +2,7 @@ package handle;
 
 import java.util.Scanner;
 
-import entyti.User;
+import entity.User;
 import main.MainRun;
 
 public class DangKy {
@@ -14,4 +14,6 @@ public class DangKy {
 			}
 			
 	}
+	
+	
 }

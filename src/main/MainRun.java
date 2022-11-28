@@ -3,9 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import entyti.User;
+import entity.User;
 import handle.DangKy;
-import handle.DangNhap;
+import handle.DangNhapSai;
 import handle.InPutHandle;
 import view.Menu;
 
@@ -31,7 +31,7 @@ public class MainRun {
 		} while (true);
 		switch (choose) {
 		case 1:
-			DangNhap.xuLyDangNhap();
+			DangNhapSai.xuLyDangNhap();
 			break;
 		case 2:
 			DangKy.dangKy();

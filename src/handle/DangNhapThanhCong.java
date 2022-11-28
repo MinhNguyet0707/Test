@@ -2,16 +2,16 @@ package handle;
 
 import java.util.Scanner;
 
-import entyti.User;
+import entity.User;
 import main.MainRun;
 
-public class HandleSauDangNhap {
+public class DangNhapThanhCong {
 	public static void changeUser(User user) {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			System.out.println("Nhap Username moi");
 			String ten = sc.nextLine();
-			if (InPutHandle.checkUserName(user)) {
+			if (CheckDangNhap.checkUserName(user)) {
 				user.setUserName(ten);
 			InPutHandle.xuLySauKhiThayDoiThongTin(user);
 				break;

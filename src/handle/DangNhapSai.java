@@ -2,11 +2,11 @@ package handle;
 
 import java.util.Scanner;
 
-import entyti.User;
+import entity.User;
 import main.MainRun;
 import view.Menu;
 
-public class DangNhap {
+public class DangNhapSai {
 	public static void quenMatKhau(User user) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Nhap Email cua ban");
@@ -26,7 +26,7 @@ public static boolean checkEmaiQuenMatKhau(String email, User user) {
 	for (User user2 : MainRun.userArrayList) {
 		if (user2.getUserName().equalsIgnoreCase(user.getUserName())) {
 			if(user2.getEmail().equalsIgnoreCase(email)) {
-				HandleSauDangNhap.changPassword(user);						
+				DangNhapThanhCong.changPassword(user);						
 				return true;
 			}					
 		}
@@ -38,14 +38,14 @@ public static boolean checkEmaiQuenMatKhau(String email, User user) {
 public static void xuLyDangNhap() {
 	Scanner sc = new Scanner(System.in);
 	User user = InPutHandle.inputUser(sc);
-	if (InPutHandle.checkLogin(user) == 3) {
+	if (CheckDangNhap.checkLogin(user) == 3) {
 		Menu.MenuSauKhiDangNhap(user);
-	} else if (InPutHandle.checkLogin(user) == 1) {
+	} else if (CheckDangNhap.checkLogin(user) == 1) {
 		System.out.println("Vui long kiem tra lai user va dang nhap lai");
 		MainRun.showSortMenu();
-	} else if (InPutHandle.checkLogin(user) == 2) {
+	} else if (CheckDangNhap.checkLogin(user) == 2) {
 		System.out.println("Password khong dung");
-		Menu.MenuDangNhapSai(user);
+		Menu.menuDangNhapSai(user);
 	}
 }
 
