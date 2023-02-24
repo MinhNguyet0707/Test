@@ -1,0 +1,88 @@
+CREATE TABLE category(
+id bigint PRIMARY KEY AUTO_INCREMENT,
+category_code VARCHAR(100) NOT NULL,
+category_name VARCHAR(100)NOT NULL,
+created_date DATE NOT NULL,
+updated_date DATE NOT NULL
+);
+
+CREATE TABLE supplier(
+id int PRIMARY KEY AUTO_INCREMENT,
+supplier_code VARCHAR(100) NOT NULL,
+supplier_name VARCHAR(100)NOT NULL,
+image VARCHAR(100) NOT NULL,
+created_date DATE NOT NULL,
+updated_date DATE NOT NULL
+);
+
+CREATE TABLE product(
+id bigint PRIMARY KEY AUTO_INCREMENT,
+product_code VARCHAR(100) NOT NULL,
+product_name VARCHAR(100) NOT NULL,
+descriptions VARCHAR(100)NOT NULL,
+from_country VARCHAR(100)NOT NULL,
+is_new ENUM('NEW', 'NOT_NEW',' NULL'),
+created_date1 DATE NOT NULL ,
+updated_date1 DATE NOT NULL,
+category_id  BIGINT,
+supplier_id int,
+FOREIGN KEY (category_id) REFERENCES category(id),
+FOREIGN KEY (supplier_id) REFERENCES supplier(id)
+);
+
+CREATE TABLE product_detail (
+id BIGINT PRIMARY KEY  AUTO_INCREMENT,
+image VARCHAR(255),
+standard_cost VARCHAR(100),
+quantity INT,
+color VARCHAR(255),
+created_date DATE NOT NULL ,
+updated_date DATE NOT NULL,
+product_id bigint,
+ FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
+CREATE TABLE customers(
+id INT PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(100) NOT NULL,
+PASWORD VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+last_name VARCHAR(100) NOT NULL,
+gender ENUM('NULL', 'MALE', 'FEMALE') NOT NULL,
+email VARCHAR(255) NOT NULL,
+birth_day DATE  NOT NULL,
+avartar VARCHAR(100) NOT NULL,
+phone VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+city VARCHAR(255) NOT NULL,
+country VARCHAR(255) NOT NULL,
+code_active VARCHAR(36) NOT NULL,
+statuss  ENUM('NULL', 'ENABLE', 'DISABLE') NOT NULL,
+created_date DATE NOT NULL ,
+updated_date DATE NOT null
+);
+
+CREATE TABLE orders (
+id INT PRIMARY KEY AUTO_INCREMENT,
+order_code VARCHAR(255) NOT NULL,
+total_money VARCHAR(255) NOT NULL,
+statuss VARCHAR(100) NOT null ,
+created_date DATE NOT NULL ,
+updated_date DATE NOT NULL,
+customer_id int,
+product_id bigint,
+FOREIGN KEY (customer_id) REFERENCES customers(id),
+FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
+CREATE TABLE order_detail(
+id INT PRIMARY KEY AUTO_INCREMENT,
+product_id BIGINT,
+product_detail_id BIGINT,
+quantity INT NOT NULL,
+toltal VARCHAR(100) NOT NULL,
+order_id INT NOT NULL,
+FOREIGN KEY (product_id) REFERENCES product(id),
+FOREIGN KEY (product_detail_id) REFERENCES product_detail(id),
+FOREIGN KEY (order_id) REFERENCES orders(id)
+);
