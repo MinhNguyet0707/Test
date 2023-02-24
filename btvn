@@ -1,0 +1,71 @@
+CREATE TABLE ACCOUNT(
+id INT PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(100) NOT NULL,
+PASWORD VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+last_name VARCHAR(100) NOT NULL,
+gender ENUM('NULL', 'MALE', 'FEMALE') NOT NULL,
+email VARCHAR(255) NOT NULL,
+birth_day DATE  NOT NULL,
+avartar VARCHAR(100) NOT NULL,
+phone VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+city VARCHAR(255) NOT NULL,
+country VARCHAR(255) NOT NULL,
+code_active VARCHAR(36) NOT NULL,
+statuss  ENUM('NULL', 'ENABLE', 'DISABLE') NOT NULL,
+created_date DATE NOT NULL ,
+updated_date DATE NOT null
+);
+
+CREATE TABLE roles(
+id INT PRIMARY KEY AUTO_INCREMENT,
+role_name VARCHAR(100) NOT NULL,
+created_date DATE NOT null,
+updated_date date NOT NULL
+);
+
+CREATE TABLE accout_role(
+id INT PRIMARY KEY AUTO_INCREMENT,
+account_id INT,
+role_id  INT,
+FOREIGN KEY (account_id ) REFERENCES account(id),
+FOREIGN KEY ( role_id) REFERENCES roles(id)
+);
+
+
+INSERT INTO account(username, pasword, first_name, last_name, gender, email, birth_day, avartar,
+ phone, address, city, country, code_active,statuss, created_date, updated_date)
+ VALUES('nguyet', '1234', 'Bui', 'Minh', 'FEMALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c','ENABLE','2022-1-3','2024-4-4'),
+ ('hoan', '1234', 'tran', 'Minh', 'MALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c','ENABLE','2022-1-3','2024-4-4'),
+('hoa', '1234', 'Bui', 'Minh', 'FEMALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c', 'ENABLE','2022-1-3','2024-4-4'),
+ ('hai', '1234', 'Bui', 'Minh', 'FEMALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c', 'DISABLE','2022-1-3','2024-4-4'),
+ ('minh', '1234', 'Bui', 'Minh', 'FEMALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c', 'DISABLE','2022-1-3','2024-4-4'),
+ ('lhoa', '1234', 'Bui', 'Minh', 'FEMALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c', 'DISABLE','2022-1-3','2024-4-4'),
+ ('anh', '1234', 'Bui', 'Minh', 'FEMALE', 'ngute.doe@gmail.com', '1990-01-01', 'avatar.jpg', 
+ '1234567890', '123 nnn', 'HN', 'VN', '7db352fa-4417-4ca3-b19b-d78d441f378c', 'DISABLE','2022-1-3','2024-4-4')
+
+INSERT INTO roles(role_name,created_date,updated_date)
+VALUES('minh nguyet','2022-2-2','2022-3-5'),
+('khai hoan','2022-2-2','2022-3-5'),
+('le roit','2022-2-2','2022-3-5'),
+('minht','2022-2-2','2022-3-5'),
+('min','2022-2-2','2022-3-5'),
+('minguyet','2022-2-2','2022-3-5')
+
+
+INSERT INTO accout_role(account_id,role_id)
+VALUES (1,1),
+(1,2),
+(2,2),
+(3,2),
+(5,3),
+(5,4),
+(5,5),
+(5,6)
